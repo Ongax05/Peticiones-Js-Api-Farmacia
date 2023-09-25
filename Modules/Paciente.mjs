@@ -1,12 +1,11 @@
 import { rejects } from "assert";
 import { resolve } from "path";
 
-const url = "http://localhost:5258/api/Proveedor"
-export async function PostProveedor(nombre, email, telefono, direccion, token) {
+const url = "http://localhost:5258/api/Paciente"
+export async function PostPaciente(nombre, telefono, direccion, token) {
     return new Promise(async (resolve, reject) => {
       const dataToSend = {
         nombre: nombre,
-        email: email,
         telefono: telefono,
         direccion: direccion,
       };
@@ -39,7 +38,7 @@ export async function PostProveedor(nombre, email, telefono, direccion, token) {
 
 
 
-export function GetProveedores(pageSize, pageIndex, token) {
+export function GetPacientes(pageSize, pageIndex, token) {
   return new Promise(async (resolve, reject) => {
     try {
 
@@ -68,12 +67,11 @@ export function GetProveedores(pageSize, pageIndex, token) {
   });
 }
 
-export async function PutProveedor(id, nombre, email, telefono, direccion, token) {
+export async function PutPaciente(id, nombre, telefono, direccion, token) {
     return new Promise(async (resolve, reject) => {
       const dataToSend = {
         id: id,
         nombre: nombre,
-        email: email,
         telefono: telefono,
         direccion: direccion,
       };
