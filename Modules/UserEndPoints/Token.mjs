@@ -13,7 +13,6 @@ export function GetToken(username, password) {
     })
       .then((response) => {
         if (response.status === 200) {
-          console.log("success");
           return response.json();
         } else {
           console.error(`Error: ${response.status}`);

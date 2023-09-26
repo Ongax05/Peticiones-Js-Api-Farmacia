@@ -1,13 +1,14 @@
 import { rejects } from "assert";
 import { resolve } from "path";
 
-const url = "http://localhost:5258/api/Empleado"
-export async function PostEmpleado(nombre,cargo, token) {
+const url = "http://localhost:5258/api/MedicamentoComprado"
+export async function PostMedicamentoComprado(CompraId,MedicamentoId,CantidadComprada,PrecioCompra,token) {
     return new Promise(async (resolve, reject) => {
       const dataToSend = {
-       Nombre: nombre,
-       Cargo: cargo,
-       FechaContratacion : new Date()
+        CompraId : CompraId,
+        MedicamentoId : MedicamentoId,
+        CantidadComprada : CantidadComprada,
+        PrecioCompra : PrecioCompra
       };
   
       try {
@@ -38,7 +39,7 @@ export async function PostEmpleado(nombre,cargo, token) {
 
 
 
-export function GetEmpleados(pageSize, pageIndex, token) {
+export function GetMedicamentosComprados(pageSize, pageIndex, token) {
   return new Promise(async (resolve, reject) => {
     try {
 
@@ -67,12 +68,14 @@ export function GetEmpleados(pageSize, pageIndex, token) {
   });
 }
 
-export async function PutEmpleado(id, nombre, cargo, token) {
+export async function PutMedicamentoComprado(id, CompraId,MedicamentoId,CantidadComprada,PrecioCompra, token) {
     return new Promise(async (resolve, reject) => {
       const dataToSend = {
         id: id,
-        nombre: nombre,
-        cargo: cargo,
+        CompraId : CompraId,
+        MedicamentoId : MedicamentoId,
+        CantidadComprada : CantidadComprada,
+        PrecioCompra : PrecioCompra
       };
   
       try {
@@ -100,7 +103,7 @@ export async function PutEmpleado(id, nombre, cargo, token) {
     });
   }
   
-  export async function DeleteEmpleado(id, token) {
+  export async function DeleteMedicamentoComprado(id, token) {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await fetch(url + "/" + id, {

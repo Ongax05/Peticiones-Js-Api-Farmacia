@@ -101,4 +101,28 @@ export async function PutPaciente(id, nombre, telefono, direccion, token) {
     });
   }
   
-
+  export async function DeletePaciente(id, token) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await fetch(url + "/" + id, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        if (response.status === 204) {
+          console.log("Solicitud exitosa");
+          resolve();
+        } else {
+          console.error(`Error: ${response.status}`);
+          reject(`Error: ${response.status}`);
+        }
+      } catch (error) {
+        console.error(`Error en la solicitud: ${error}`);
+        reject(error);
+      }
+    });
+  }
+  
