@@ -1,8 +1,8 @@
 import { rejects } from "assert";
 import { resolve } from "path";
 
-const url = "http://localhost:5258/api/Compra"
-export async function PostCompra(VentaId,MedicamentoId,CantidadVendida,Precio,token) {
+const url = "http://localhost:5258/api/MedicamentoVendido"
+export async function PostMedicamentoVendido(VentaId,MedicamentoId,CantidadVendida,Precio,token) {
     return new Promise(async (resolve, reject) => {
       const dataToSend = {
         VentaId:VentaId,
@@ -26,8 +26,8 @@ export async function PostCompra(VentaId,MedicamentoId,CantidadVendida,Precio,to
           const jsonResponse = await response.json();
           resolve(jsonResponse);
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       } catch (error) {
         console.error(`Error en la solicitud: ${error}`);
@@ -39,17 +39,15 @@ export async function PostCompra(VentaId,MedicamentoId,CantidadVendida,Precio,to
 
 
 
-export function GetCompras(pageSize, pageIndex, token) {
+export function GetMedicamentosVendidos(pageSize, pageIndex, token) {
   return new Promise(async (resolve, reject) => {
     try {
 
-      const response = await fetch(url, {
+      const response = await fetch(url+ `?pageIndex=${pageIndex}&pageSize=${pageSize}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
-          PageSize: pageSize,
-          PageIndex: pageIndex,
         }
       });
 
@@ -58,8 +56,8 @@ export function GetCompras(pageSize, pageIndex, token) {
         const jsonData = await response.json();
         resolve(jsonData);
       } else {
-        console.error(`Error: ${response.status}`);
-        reject(`Error: ${response.status}`);
+        console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+        reject(`Error: ${response.status}\nError msg : ${response.text()}`);
       }
     } catch (error) {
       console.error(`Error en la solicitud: ${error}`);
@@ -68,7 +66,7 @@ export function GetCompras(pageSize, pageIndex, token) {
   });
 }
 
-export async function PutCompra(id, VentaId,MedicamentoId,CantidadVendida,Precio, token) {
+export async function PutMedicamentoVendido(id, VentaId,MedicamentoId,CantidadVendida,Precio, token) {
     return new Promise(async (resolve, reject) => {
       const dataToSend = {
         id: id,
@@ -93,8 +91,8 @@ export async function PutCompra(id, VentaId,MedicamentoId,CantidadVendida,Precio
           const jsonResponse = await response.json(); 
           resolve(jsonResponse); 
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       } catch (error) {
         console.error(`Error en la solicitud: ${error}`);
@@ -103,7 +101,7 @@ export async function PutCompra(id, VentaId,MedicamentoId,CantidadVendida,Precio
     });
   }
   
-  export async function DeleteCompra(id, token) {
+  export async function DeleteMedicamentoVendido(id, token) {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await fetch(url + "/" + id, {
@@ -118,8 +116,8 @@ export async function PutCompra(id, VentaId,MedicamentoId,CantidadVendida,Precio
           console.log("Solicitud exitosa");
           resolve();
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       } catch (error) {
         console.error(`Error en la solicitud: ${error}`);

@@ -20,8 +20,8 @@ export function refreshAccessToken(refreshToken) {
         if (response.status === 200) {
           return response.json();
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       })
       .then((data) => {

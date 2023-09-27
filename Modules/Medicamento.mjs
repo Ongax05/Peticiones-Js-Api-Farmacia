@@ -27,8 +27,8 @@ export async function PostMedicamento(Nombre,Precio,Stock,FechaExpiracion,Proove
           const jsonResponse = await response.json();
           resolve(jsonResponse);
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()} ${await response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       } catch (error) {
         console.error(`Error en la solicitud: ${error}`);
@@ -44,13 +44,11 @@ export function GetMedicamentos(pageSize, pageIndex, token) {
   return new Promise(async (resolve, reject) => {
     try {
 
-      const response = await fetch(url, {
+      const response = await fetch(url+ `?pageIndex=${pageIndex}&pageSize=${pageSize}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-          PageSize: pageSize,
-          PageIndex: pageIndex,
+          Authorization: `Bearer ${token}`
         }
       });
 
@@ -59,8 +57,8 @@ export function GetMedicamentos(pageSize, pageIndex, token) {
         const jsonData = await response.json();
         resolve(jsonData);
       } else {
-        console.error(`Error: ${response.status}`);
-        reject(`Error: ${response.status}`);
+        console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+        reject(`Error: ${response.status}\nError msg : ${response.text()}`);
       }
     } catch (error) {
       console.error(`Error en la solicitud: ${error}`);
@@ -95,8 +93,8 @@ export async function PutMedicamento(id, Nombre,Precio,Stock,FechaExpiracion,Pro
           const jsonResponse = await response.json(); 
           resolve(jsonResponse); 
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       } catch (error) {
         console.error(`Error en la solicitud: ${error}`);
@@ -120,8 +118,8 @@ export async function PutMedicamento(id, Nombre,Precio,Stock,FechaExpiracion,Pro
           console.log("Solicitud exitosa");
           resolve();
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       } catch (error) {
         console.error(`Error en la solicitud: ${error}`);
@@ -130,3 +128,29 @@ export async function PutMedicamento(id, Nombre,Precio,Stock,FechaExpiracion,Pro
     });
   }
   
+  export function GetLessThan50(token) {
+    return new Promise(async (resolve, reject) => {
+      try {
+  
+        const response = await fetch(url+"/GetLessThan50", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          }
+        });
+  
+        if (response.status === 200) {
+          console.log("Solicitud exitosa");
+          const jsonData = await response.json();
+          resolve(jsonData);
+        } else {
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
+        }
+      } catch (error) {
+        console.error(`Error en la solicitud: ${error}`);
+        reject(error);
+      }
+    });
+  }

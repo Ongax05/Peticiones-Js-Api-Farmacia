@@ -1,4 +1,4 @@
-export function GetToken(username, password, role) {
+export function AddRole(username, password, role) {
   return new Promise((resolve, reject) => {
     const url = "http://localhost:5258/api/User/addrole";
     const dataToSend = {
@@ -18,8 +18,8 @@ export function GetToken(username, password, role) {
           console.log(response.status);
           resolve(response.status);
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       })
       .catch((error) => {

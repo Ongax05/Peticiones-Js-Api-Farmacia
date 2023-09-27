@@ -23,8 +23,8 @@ export async function PostCompra(ProveedorId,token) {
           const jsonResponse = await response.json();
           resolve(jsonResponse);
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       } catch (error) {
         console.error(`Error en la solicitud: ${error}`);
@@ -40,13 +40,11 @@ export function GetCompras(pageSize, pageIndex, token) {
   return new Promise(async (resolve, reject) => {
     try {
 
-      const response = await fetch(url, {
+      const response = await fetch(url + `?pageIndex=${pageIndex}&pageSize=${pageSize}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
-          PageSize: pageSize,
-          PageIndex: pageIndex,
         }
       });
 
@@ -55,8 +53,8 @@ export function GetCompras(pageSize, pageIndex, token) {
         const jsonData = await response.json();
         resolve(jsonData);
       } else {
-        console.error(`Error: ${response.status}`);
-        reject(`Error: ${response.status}`);
+        console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+        reject(`Error: ${response.status}\nError msg : ${response.text()}`);
       }
     } catch (error) {
       console.error(`Error en la solicitud: ${error}`);
@@ -87,8 +85,8 @@ export async function PutCompra(id, ProveedorId, token) {
           const jsonResponse = await response.json(); 
           resolve(jsonResponse); 
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       } catch (error) {
         console.error(`Error en la solicitud: ${error}`);
@@ -112,8 +110,8 @@ export async function PutCompra(id, ProveedorId, token) {
           console.log("Solicitud exitosa");
           resolve();
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       } catch (error) {
         console.error(`Error en la solicitud: ${error}`);

@@ -20,8 +20,8 @@ export function RegisterUser(username, password, email) {
           console.log("success");
           resolve(response.status);
         } else {
-          console.error(`Error: ${response.status}`);
-          reject(`Error: ${response.status}`);
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
         }
       })
       .catch((error) => {
