@@ -125,4 +125,30 @@ export async function PutMedicamentoComprado(id, CompraId,MedicamentoId,Cantidad
       }
     });
   }
+
+  export function GetDrugPurchasedFrom(proveedorId, token) {
+    return new Promise(async (resolve, reject) => {
+      try {
   
+        const response = await fetch(url+ `/GetDrugPurchasedFrom?ProveedorId=${proveedorId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+        });
+  
+        if (response.status === 200) {
+          console.log("Solicitud exitosa");
+          const jsonData = await response.json();
+          resolve(jsonData);
+        } else {
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
+        }
+      } catch (error) {
+        console.error(`Error en la solicitud: ${error}`);
+        reject(error);
+      }
+    });
+  }

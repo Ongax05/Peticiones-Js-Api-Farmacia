@@ -5,7 +5,8 @@ const url = "http://localhost:5258/api/Compra"
 export async function PostCompra(ProveedorId,token) {
     return new Promise(async (resolve, reject) => {
       const dataToSend = {
-        ProveedorId : ProveedorId
+        ProveedorId : ProveedorId,
+        FechaCompra : new Date().toISOString()
       };
   
       try {
