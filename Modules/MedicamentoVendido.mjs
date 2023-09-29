@@ -152,7 +152,7 @@ export async function PutMedicamentoVendido(id, VentaId,MedicamentoId,CantidadVe
       }
     });
   }
-  export function GetTotalDrugSold(drugName,token) {
+  export function GetTotalDrugsSold(drugName,token) {
     return new Promise(async (resolve, reject) => {
       try {
   
