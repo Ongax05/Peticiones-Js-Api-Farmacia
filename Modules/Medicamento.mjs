@@ -310,3 +310,55 @@ export async function PutMedicamento(id, Nombre,Precio,Stock,FechaExpiracion,Pro
       }
     });
   }
+  export function GetTotalDrugUnsoldBetween(firtsDate,lastDate,token) {
+    return new Promise(async (resolve, reject) => {
+      try {
+  
+        const response = await fetch(url+ `/GetTotalDrugUnsoldBetween?firtsDate=${firtsDate}&lastDate=${lastDate}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          }
+        });
+  
+        if (response.status === 200) {
+          console.log("Solicitud exitosa");
+          const jsonData = await response.json();
+          resolve(jsonData);
+        } else {
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
+        }
+      } catch (error) {
+        console.error(`Error en la solicitud: ${error}`);
+        reject(error);
+      }
+    });
+  }
+  export function GetDrugWithPiceMoreThanAndStokLeastThan(price,stok,token) {
+    return new Promise(async (resolve, reject) => {
+      try {
+  
+        const response = await fetch(url+ `/GetDrugWithPiceMoreThanAndStokLeastThan?price=${price}&stok=${stok}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          }
+        });
+  
+        if (response.status === 200) {
+          console.log("Solicitud exitosa");
+          const jsonData = await response.json();
+          resolve(jsonData);
+        } else {
+          console.error(`Error: ${response.status}\nError msg : ${response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${response.text()}`);
+        }
+      } catch (error) {
+        console.error(`Error en la solicitud: ${error}`);
+        reject(error);
+      }
+    });
+  }

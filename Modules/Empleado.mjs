@@ -252,3 +252,29 @@ export async function PutEmpleado(id, nombre, cargo, token) {
       }
     });
   }
+  export function EmployeesWhoDidntSellBetween(firtsDate,lastDate,token) {
+    return new Promise(async (resolve, reject) => {
+      try {
+  
+        const response = await fetch(url+ `/EmployeesWhoDidntSellBetween?firtsDate=${firtsDate}&lastDate=${lastDate}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          }
+        });
+  
+        if (response.status === 200) {
+          console.log("Solicitud exitosa");
+          const jsonData = await response.json();
+          resolve(jsonData);
+        } else {
+          console.error(`Error: ${response.status}\nError msg : ${await response.text()}`);
+          reject(`Error: ${response.status}\nError msg : ${await response.text()}`);
+        }
+      } catch (error) {
+        console.error(`Error en la solicitud: ${error}`);
+        reject(error);
+      }
+    });
+  }
